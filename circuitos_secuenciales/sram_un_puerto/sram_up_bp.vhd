@@ -15,7 +15,7 @@ end sram_up_bp;
 
 architecture tb_arch of sram_up_bp is
 
-   constant T: time := 20 ns;  -- Clock Period
+   constant T: time := 20 ns;  -- Período del Reloj
    signal clk: std_logic;
    signal we:  std_logic;
    signal dir: std_logic_vector(DIR_ANCHO-1 downto 0);
