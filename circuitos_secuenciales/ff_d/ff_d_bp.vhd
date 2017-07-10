@@ -7,7 +7,7 @@ entity ff_d_bp is
 end ff_d_bp;
 
 architecture arq_bp of ff_d_bp is
-   constant T: time := 20 ns;        -- Período del reloj
+   constant T: time := 20 ns;        -- PerÃ­odo del reloj
    signal clk, prueba_e: std_logic;  -- Entradas
    signal prueba_s:      std_logic;  -- Salida
 begin
@@ -27,7 +27,7 @@ begin
       wait for T/2;
    end process;
 
-   -- Otros estímulos
+   -- Otros estÃ­mulos
    process begin
       for i in 1 to 10 loop  -- Esperar 10 transisiones del Flip Flop tipo D
          prueba_e <= '0';
@@ -37,9 +37,9 @@ begin
          wait until falling_edge(clk);
       end loop;
 
-      -- Terminar la simulación
+      -- Terminar la simulaciÃ³n
       assert false
-         report "Simulación Completada"
+         report "SimulaciÃ³n Completada"
       severity failure;
    end process;
 end arq_bp;
