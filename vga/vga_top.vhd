@@ -9,7 +9,7 @@ use ieee.numeric_std.all;
 entity vga_top is
   port(
     clk, rst: in  std_logic;
-    px_tick: out std_logic
+    hsinc   : out std_logic
   );
 end vga_top;
 
@@ -20,9 +20,11 @@ begin
   -- Instanciar un circuito de sincronización VGA
   unidad_vga_sinc: entity work.vga_sinc(arq)
     port map(
-             clk => clk,
-             rst => rst,
-             px_tick => px_tick
+             clk     => clk,
+             rst     => rst,
+             px_tick => open,
+             pixel_x => open,
+             hsinc   => hsinc
     );
 
 end arq;
