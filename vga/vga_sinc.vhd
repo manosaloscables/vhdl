@@ -32,6 +32,9 @@ architecture arq of vga_sinc is
   -- Contadores de sincronización
   signal h_cont_reg, h_cont_next: unsigned(9 downto 0);
 
+  -- Búfer de salida
+  signal h_sinc_reg, h_sinc_next: std_logic;
+
   -- Señal de estado
     signal pixel_tick, h_fin: std_logic;
 
@@ -42,10 +45,12 @@ begin
     if rst = '0' then
       mod2_reg <= '0';
       h_cont_reg <= (others => '0');
+      h_sinc_reg <= '0';
 
     elsif(rising_edge(clk)) then
       mod2_reg <= mod2_next;
       h_cont_reg <= h_cont_next;
+      h_sinc_reg <= h_sinc_next;
     end if;
 
   end process;
@@ -78,10 +83,16 @@ begin
     end if;
 
   end process;
+
+  -- Búfer para la sincronización horizontal y vertical para evitar fallas
+  h_sinc_next <=
+    '1' when (h_cont_reg < (HD + HF))               -- 656
+         or  (h_cont_reg >= (HD + HF + HP -1)) else -- 751
+    '0';
   
   -- Señal de salida
   px_tick <= pixel_tick;
-  hsinc   <= not h_fin;
   pixel_x <= std_logic_vector(h_cont_reg);
+  hsinc   <= h_sinc_reg;
 
 end arq;
