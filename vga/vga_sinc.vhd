@@ -11,9 +11,9 @@ entity vga_sinc is
   port(
     clk: in  std_logic;  -- Reloj de 50 MHz 
     rst: in  std_logic;
-    px_tick : out std_logic;
-    pixel_x, pixel_y : out std_logic_vector(9 downto 0);
-    hsinc  , vsinc   : out std_logic
+    px_tick, video_on : out std_logic;
+    pixel_x, pixel_y  : out std_logic_vector(9 downto 0);
+    hsinc  , vsinc    : out std_logic
   );
 
 end vga_sinc;
@@ -124,6 +124,11 @@ begin
   v_sinc_next <=
     '1' when (v_cont_reg <  (VD + VF))                -- 490
          or  (v_cont_reg >= (VD + VF + VP - 1)) else  -- 491
+    '0';
+
+  -- Video on/off
+  video_on <=
+    '1' when (h_cont_reg < HD) and (v_cont_reg < VD) else
     '0';
   
   -- Señal de salida
