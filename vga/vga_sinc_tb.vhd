@@ -12,8 +12,8 @@ end vga_bp;
 architecture arq_bp of vga_bp is
   constant T: time := 20 ns;  -- Periodo del Reloj
   signal clk, rst: std_logic; -- Entradas
-  signal px_tick, hsinc: std_logic;  -- Salidas
-  signal px_x: std_logic_vector(9 downto 0);
+  signal px_tick, hsinc, vsinc: std_logic;  -- Salidas
+  signal px_x, px_y: std_logic_vector(9 downto 0);
 
 begin
 
@@ -23,8 +23,10 @@ begin
              clk     => clk,
              rst     => rst,
              px_tick => px_tick,
+             pixel_x => px_x,
+             pixel_y => px_y,
              hsinc   => hsinc,
-             pixel_x => px_x
+             vsinc   => vsinc
     );
 
   -- Reloj
@@ -41,7 +43,7 @@ begin
   -- Otros estímulos
   process begin
 
-    for i in 1 to 3201 loop
+    for i in 1 to 1000000 loop
       wait until falling_edge(clk);
     end loop;
 

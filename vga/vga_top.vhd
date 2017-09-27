@@ -8,8 +8,8 @@ use ieee.numeric_std.all;
 
 entity vga_top is
   port(
-    clk, rst: in  std_logic;
-    hsinc   : out std_logic
+    clk  , rst   : in  std_logic;
+    hsinc, vsinc : out std_logic
   );
 end vga_top;
 
@@ -24,7 +24,9 @@ begin
              rst     => rst,
              px_tick => open,
              pixel_x => open,
-             hsinc   => hsinc
+             pixel_y => open,
+             hsinc   => hsinc,
+             vsinc   => vsinc
     );
 
 end arq;
