@@ -1,6 +1,6 @@
--- *********************************
--- * Circuito para generar objetos *
--- *********************************
+-- *************************************
+-- * Circuito para generar objetos VGA *
+-- *************************************
 
 library ieee;
 use ieee.std_logic_1164.all;
