@@ -39,26 +39,26 @@ begin
   -- Instanciar un generador de objetos con pared
   unidad_gen_obj: entity work.gen_obj(pared)
     port map(
+             obj_on  => pared_on,
              pixel_x => px_x,
              pixel_y => px_y,
-             obj_on  => pared_on,
              obj_rgb => pared_rgb
     );
 
   -- Instanciar un generador de objetos con barra
   u2_gen_obj: entity work.gen_obj(barra)
     port map(
+             obj_on  => bar_on,
              pixel_x => px_x,
              pixel_y => px_y,
-             obj_on  => bar_on,
              obj_rgb => bar_rgb
     );
 
   -----------------------------------------
   -- Circuito multiplexor de objetos RGB --
   -----------------------------------------
-  process(video_on, pared_on, bar_on,
-          pared_rgb, bar_rgb)
+
+  process(video_on, pared_on, bar_on, pared_rgb, bar_rgb)
   begin
 
     if video_on = '0' then
