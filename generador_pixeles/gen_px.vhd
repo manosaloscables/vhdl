@@ -17,8 +17,8 @@ architecture arq of gen_px is
 
   signal px_tick, video_on: std_logic;
   signal px_x, px_y: std_logic_vector(9 downto 0);
-  signal pared_on, bar_on: std_logic;
-  signal pared_rgb, bar_rgb, rgb_reg, rgb_next:
+  signal pared_on, bar_on, bola_on: std_logic;
+  signal pared_rgb, bar_rgb, bola_rgb, rgb_reg, rgb_next:
           std_logic_vector(2 downto 0);
 
 begin
@@ -54,6 +54,15 @@ begin
              obj_rgb => bar_rgb
     );
 
+  -- Instanciar un generador de objetos con bola
+  u3_gen_obj: entity work.gen_obj(bola)
+    port map(
+             obj_on  => bola_on,
+             pixel_x => px_x,
+             pixel_y => px_y,
+             obj_rgb => bola_rgb
+    );
+
   -----------------------------------------
   -- Circuito multiplexor de objetos RGB --
   -----------------------------------------
@@ -71,6 +80,9 @@ begin
 
       elsif bar_on = '1' then
         rgb_next <= bar_rgb;
+
+      elsif bola_on = '1' then
+        rgb_next <= bola_rgb;
 
       else
         rgb_next <= "111";  -- Fondo blanco

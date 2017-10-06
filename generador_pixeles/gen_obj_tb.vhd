@@ -13,8 +13,8 @@ end gen_obj_bp;
 
 architecture arq_bp of gen_obj_bp is
   signal px_x, px_y: std_logic_vector(9 downto 0);  -- Entradas
-  signal pared_on, bar_on: std_logic;  -- Salidas
-  signal pared_rgb, bar_rgb: std_logic_vector(2 downto 0);
+  signal pared_on, bar_on, bola_on: std_logic;  -- Salidas
+  signal pared_rgb, bar_rgb, bola_rgb: std_logic_vector(2 downto 0);
   
   signal x, y: unsigned(9 downto 0);  -- Estímulos
 
@@ -36,6 +36,15 @@ begin
              pixel_x => px_x,
              pixel_y => px_y,
              obj_rgb => bar_rgb
+    );
+
+  -- Instanciar un generador de objetos con bola
+  u3_gen_obj: entity work.gen_obj(bola)
+    port map(
+             obj_on  => bola_on,
+             pixel_x => px_x,
+             pixel_y => px_y,
+             obj_rgb => bola_rgb
     );
 
   -- Otros estímulos
