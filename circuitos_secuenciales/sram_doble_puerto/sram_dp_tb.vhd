@@ -25,18 +25,18 @@ begin
   -- =============
   -- Instanciación
   -- =============
-  sram_dp_unit: entity work.sram_dp(arq_dir_reg)
+  unidad_sram_dp: entity work.sram_dp(arq_dir_reg)
 
     generic map(DIR_ANCHO   => DIR_ANCHO,
                 DATOS_ANCHO => DATOS_ANCHO)
 
     port map(
-             clk    => clk,
-             we     => we,
+             clk   => clk,
+             we    => we,
              w_dir => w_dir,
              r_dir => r_dir,
-             d      => d,
-             q      => q
+             d     => d,
+             q     => q
     );
 
   -- =====
