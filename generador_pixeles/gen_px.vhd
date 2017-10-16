@@ -67,8 +67,8 @@ begin
   -- Circuito multiplexor de objetos RGB --
   -----------------------------------------
 
-  process(video_on, pared_on, bar_on, pared_rgb, bar_rgb)
-  begin
+  -- Revisar las entradas (sensitivy list)
+  process(video_on, pared_on, bar_on, pared_rgb, bar_rgb) begin
 
     if video_on = '0' then
       rgb_next <= "000";  -- Apagado
